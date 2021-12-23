@@ -57,7 +57,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
 bot = commands.Bot(command_prefix="!")
 
 @bot.command()
-async def law(ctx, url='https://youtu.be/-cWipgJDEOA'):
+async def law(ctx, url='https://www.youtube.com/watch?v=-cWipgJDEOA'):
     """Plays the 'Cool it with the anti-semitic remarks' clip from the film American Psycho (2000)"""
     author_voice_state = ctx.message.author.voice
     if not author_voice_state:
