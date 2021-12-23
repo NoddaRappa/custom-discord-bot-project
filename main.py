@@ -101,6 +101,23 @@ async def stop(ctx):
     ctx.voice_client.stop()
 
 @bot.event
+async def on_voice_state_update(member, before, after):
+    if not member.id == bot.user.id:
+        return
+    elif before.channel != after.channel:
+        voice = after.channel.guild.voice_client
+        time = 0
+        while True:
+            await asyncio.sleep(1)
+            time += 1
+            if voice.is_playing() and not voice.is_paused():
+                time = 0
+            if time == 20:
+                await voice.disconnect()
+            if not voice.is_connected():
+                break
+
+@bot.event
 async def on_message(message):
     if message.content == "sus":
         async with aiohttp.ClientSession() as session:
