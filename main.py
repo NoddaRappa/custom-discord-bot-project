@@ -119,14 +119,14 @@ async def on_voice_state_update(member, before, after):
 
 @bot.event
 async def on_message(message):
-    if message.content == "sus":
+    if "sus" in message.content.lower().split():
         async with aiohttp.ClientSession() as session:
             async with session.get('https://tinyurl.com/ya83aknu') as resp:
                 if resp.status != 200:
                     return await message.channel.send('Could not download file...')
                 data = io.BytesIO(await resp.read())
                 await message.channel.send(file=discord.File(data, 'JermaSus.png'))
-    if message.content == "amogus":
+    if message.content.lower() == "amogus":
         async with aiohttp.ClientSession() as session:
             async with session.get('https://tinyurl.com/57h342aj') as resp:
                 if resp.status != 200:
