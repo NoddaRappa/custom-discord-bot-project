@@ -53,12 +53,7 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
-    
-bot = commands.Bot(command_prefix="!")
-
-@bot.command()
-async def law(ctx, url='https://www.youtube.com/watch?v=-cWipgJDEOA'):
-    """Plays the 'Cool it with the anti-semitic remarks' clip from the film American Psycho (2000)"""
+async def play_sound(ctx, url):
     author_voice_state = ctx.message.author.voice
     if not author_voice_state:
         await ctx.send('Please join a channel to use this command.')
@@ -75,6 +70,19 @@ async def law(ctx, url='https://www.youtube.com/watch?v=-cWipgJDEOA'):
     async with ctx.typing():
         player = await YTDLSource.from_url(url, loop=ctx.bot.loop)
         ctx.voice_client.play(player, after=lambda e: print(f'Player error: {e}') if e else None)
+
+bot = commands.Bot(command_prefix="!")
+
+@bot.command()
+async def law(ctx):
+    """Plays the 'Cool it with the anti-semitic remarks' clip from the film American Psycho (2000)"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=-cWipgJDEOA')
+
+@bot.command()
+async def battlepass(ctx):
+    """Plays the 'that shit looks like the battle pass' video"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=6V0QQDuo26c')
+    
 
 
 @bot.command()
@@ -104,7 +112,7 @@ async def stop(ctx):
 async def on_voice_state_update(member, before, after):
     if not member.id == bot.user.id:
         return
-    elif before.channel != after.channel:
+    elif after.channel and before.channel != after.channel:
         voice = after.channel.guild.voice_client
         time = 0
         while True:
