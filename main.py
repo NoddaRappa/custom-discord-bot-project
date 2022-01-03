@@ -83,7 +83,10 @@ async def battlepass(ctx):
     """Plays the 'that shit looks like the battle pass' video"""
     await play_sound(ctx, 'https://www.youtube.com/watch?v=6V0QQDuo26c')
     
-
+@bot.command()
+async def binted(ctx):
+    """Plays Cave Noise 1 from Minecraft"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=_fGJxPbxYf0')
 
 @bot.command()
 async def join(ctx):
