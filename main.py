@@ -74,6 +74,11 @@ async def play_sound(ctx, url):
 bot = commands.Bot(command_prefix="!")
 
 @bot.command()
+async def shutup(ctx):
+    """Plays the 'Did know know, that if you stop talking...' audio"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=wOf1RP4Cq4w')
+
+@bot.command()
 async def law(ctx):
     """Plays the 'Cool it with the anti-semitic remarks' clip from the film American Psycho (2000)"""
     await play_sound(ctx, 'https://www.youtube.com/watch?v=-cWipgJDEOA')
