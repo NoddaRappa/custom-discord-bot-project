@@ -94,6 +94,11 @@ async def binted(ctx):
     await play_sound(ctx, 'https://www.youtube.com/watch?v=_fGJxPbxYf0')
 
 @bot.command()
+async def yell(ctx):
+    """Plays the audio of Tom from 'Tom and Jerry' yelling"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=eHSJeuD3HAM')
+
+@bot.command()
 async def join(ctx):
     """Makes the bot join voice"""
     connected = ctx.author.voice
