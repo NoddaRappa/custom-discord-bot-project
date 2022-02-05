@@ -77,7 +77,7 @@ bot = commands.Bot(command_prefix="!")
 async def beans(ctx):
     """BEEEAAAAANSSSS WHAT THE FUCK?!"""
     await play_sound(ctx, 'https://www.youtube.com/watch?v=fqY0qWLl7OE')
-    
+
 @bot.command()
 async def shutup(ctx):
     """Plays the 'Did know know, that if you stop talking...' audio"""
@@ -124,6 +124,7 @@ async def leave(ctx):
 
 @bot.command()
 async def stop(ctx):
+    """stop"""
     ctx.voice_client.stop()
 
 @bot.event
