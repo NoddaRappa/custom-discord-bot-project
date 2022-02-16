@@ -74,6 +74,11 @@ async def play_sound(ctx, url):
 bot = commands.Bot(command_prefix="!")
 
 @bot.command()
+async def what(ctx):
+    """That one Earthbound track idk I haven't played the game"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=AXF_uBfQWjM')
+
+@bot.command()
 async def beans(ctx):
     """BEEEAAAAANSSSS WHAT THE FUCK?!"""
     await play_sound(ctx, 'https://www.youtube.com/watch?v=fqY0qWLl7OE')
