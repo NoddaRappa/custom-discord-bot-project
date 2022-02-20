@@ -13,6 +13,8 @@ import youtube_dl
 dotenv.load_dotenv()
 TOKEN = os.getenv("TOKEN")
 
+head_hurts = 0
+
 ydtl_format_options = {
     'format': 'best',
     'outtmpl': '%(extractor)s-%(id)s-%(title)s.%(ext)s',
@@ -73,6 +75,11 @@ async def play_sound(ctx, url):
 
 bot = commands.Bot(command_prefix="!")
 
+@bot.command()
+async def qrts(ctx):
+    """They beating your ass in the quote retweets"""
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=ZdoGg4aW4Ic')
+    
 @bot.command()
 async def what(ctx):
     """That one Earthbound track idk I haven't played the game"""
