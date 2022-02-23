@@ -78,8 +78,8 @@ bot = commands.Bot(command_prefix="!")
 @bot.command()
 async def qrts(ctx):
     """They beating your ass in the quote retweets"""
-    await play_sound(ctx, 'https://www.youtube.com/watch?v=ZdoGg4aW4Ic')
-    
+    await play_sound(ctx, 'https://www.youtube.com/watch?v=bMRUkSF1rW8')
+
 @bot.command()
 async def what(ctx):
     """That one Earthbound track idk I haven't played the game"""
