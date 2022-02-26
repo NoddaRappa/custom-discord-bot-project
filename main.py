@@ -10,10 +10,12 @@ from discord.ext.commands.errors import CommandInvokeError
 
 import youtube_dl
 
+import auxiliary
+
 dotenv.load_dotenv()
 TOKEN = os.getenv("TOKEN")
+LAW = int(os.getenv("LAW"))
 
-head_hurts = 0
 
 ydtl_format_options = {
     'format': 'best',
@@ -35,7 +37,7 @@ ffmpeg_options = {
 
 ytdl = youtube_dl.YoutubeDL(ydtl_format_options)
 
-class YTDLSource(discord.PCMVolumeTransformer):
+class YTDLSource(discord.PCMVolumeTransformer):             # player class. allows python to download mp3 files from youtube videos
     def __init__(self, source, *, data, volume=0.5):
         super().__init__(source, volume)
 
@@ -55,14 +57,15 @@ class YTDLSource(discord.PCMVolumeTransformer):
         filename = data['url'] if stream else ytdl.prepare_filename(data)
         return cls(discord.FFmpegPCMAudio(filename, **ffmpeg_options), data=data)
 
-async def play_sound(ctx, url):
+
+async def play_sound(ctx, url):             # abstracted method to make it easy to add new commands
     author_voice_state = ctx.message.author.voice
     if not author_voice_state:
         await ctx.send('Please join a channel to use this command.')
         
     
     channel = author_voice_state.channel
-    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild) #says bot object does not have client attribute.
+    voice = discord.utils.get(bot.voice_clients, guild=ctx.guild) 
     if voice:
         await voice.move_to(channel)
     else:
@@ -72,6 +75,8 @@ async def play_sound(ctx, url):
     async with ctx.typing():
         player = await YTDLSource.from_url(url, loop=ctx.bot.loop)
         ctx.voice_client.play(player, after=lambda e: print(f'Player error: {e}') if e else None)
+
+
 
 bot = commands.Bot(command_prefix="!")
 
@@ -165,6 +170,7 @@ async def on_message(message):
                     return await message.channel.send('Could not download file...')
                 data = io.BytesIO(await resp.read())
                 await message.channel.send(file=discord.File(data, 'JermaSus.png'))
+
     if message.content.lower() == "amogus":
         async with aiohttp.ClientSession() as session:
             async with session.get('https://tinyurl.com/57h342aj') as resp:
@@ -172,6 +178,11 @@ async def on_message(message):
                     return await message.channel.send('Could not download file...')
                 data = io.BytesIO(await resp.read())
                 await message.channel.send(file=discord.File(data, 'amogus.png'))
+
+    if "head hurts" in message.content.lower() and message.author.id == LAW:
+        await auxiliary.hurt_count()
+        
+    
     await bot.process_commands(message)
 
 
