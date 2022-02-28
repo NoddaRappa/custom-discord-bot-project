@@ -1,20 +1,20 @@
+from fileinput import filename
 import json
 import os
 import dotenv
 
 dotenv.load_dotenv()
-PATH = os.getenv("PATH")
 
-save_path = PATH
 file_name = 'headcount.json'
-directory = os.path.join(save_path, file_name)
-
 
 async def hurt_count():
-    file = open(directory, 'r+')
-    count = json.load(file)
-    count += 1
-    file.seek(0)
-    json.dump(count, file)
-    file.truncate()
-    file.close()
+    if os.path.exists(file_name):
+        with open(file_name, 'r+') as f:
+            count = json.load(f)
+            count += 1
+            f.seek(0)
+            json.dump(count, f)
+            f.truncate()
+    else:
+        with open(file_name, 'w') as f:
+            json.dump(1, f)
