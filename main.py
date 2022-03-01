@@ -81,6 +81,11 @@ async def play_sound(ctx, url):             # abstracted method to make it easy 
 bot = commands.Bot(command_prefix="!")
 
 @bot.command()
+async def pie(ctx):
+    """I baked you a pie"""
+    await play_sound(ctx, "https://youtu.be/2l6NM5AOIVE")
+    
+@bot.command()
 async def qrts(ctx):
     """They beating your ass in the quote retweets"""
     await play_sound(ctx, 'https://www.youtube.com/watch?v=bMRUkSF1rW8')
@@ -156,7 +161,7 @@ async def on_voice_state_update(member, before, after):
             time += 1
             if voice.is_playing() and not voice.is_paused():
                 time = 0
-            if time == 20:
+            if time == 30:
                 await voice.disconnect()
             if not voice.is_connected():
                 break
