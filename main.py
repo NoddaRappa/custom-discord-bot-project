@@ -81,6 +81,11 @@ async def play_sound(ctx, url):             # abstracted method to make it easy 
 bot = commands.Bot(command_prefix="!")
 
 @bot.command()
+async def yoda(ctx):
+    """Arghhhhhhhh"""
+    await play_sound(ctx, "https://www.youtube.com/watch?v=glN0W8WogK8")
+    
+@bot.command()
 async def pie(ctx):
     """I baked you a pie"""
     await play_sound(ctx, "https://youtu.be/2l6NM5AOIVE")
